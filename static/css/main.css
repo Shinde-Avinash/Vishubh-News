@@ -5,13 +5,12 @@
 
 /* ========== CSS Variables ========== */
 :root {
-    /* Cognizant-inspired color palette */
+    /* Light Theme Variables (Default) */
     --primary-blue: #0033A0;
     --secondary-blue: #00529B;
     --accent-blue: #00ADEF;
     --light-blue: #E8F4F8;
     
-    /* Neutral colors */
     --text-primary: #333333;
     --text-secondary: #666666;
     --text-light: #999999;
@@ -19,7 +18,6 @@
     --background-light: #F5F7FA;
     --background-gray: #E5E7EB;
     
-    /* Borders and shadows */
     --border-color: #D1D5DB;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -39,6 +37,26 @@
     
     /* Transitions */
     --transition: all 0.3s ease;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --primary-blue: #4dabf7;       /* Lighter blue for dark mode */
+    --secondary-blue: #339af0;
+    --accent-blue: #74c0fc;
+    --light-blue: #1c2533;         /* Darker blue bg */
+    
+    --text-primary: #e9ecef;       /* Light text */
+    --text-secondary: #adb5bd;
+    --text-light: #6c757d;
+    --background: #121212;         /* Very dark bg */
+    --background-light: #1e1e1e;   /* Slightly lighter dark bg */
+    --background-gray: #2c2c2c;
+    --border-color: #404040;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* ========== Global Styles ========== */
@@ -650,4 +668,40 @@ img {
     border-radius: 12px;
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+/* ========== Theme Toggle ========== */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background-color: var(--background-light);
+    color: var(--primary-blue);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-sun {
+    display: none;
+}
+
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }

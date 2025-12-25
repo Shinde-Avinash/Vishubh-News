@@ -38,7 +38,13 @@
             </div>
 
             <!-- Navigation Menu -->
-            <nav>
+            <nav style="display: flex; align-items: center; gap: 1rem;">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+
                 <ul class="nav-menu">
                     <li><a href="{% url 'news:home' %}" class="nav-link">Home</a></li>
                     {% if user.is_authenticated %}
