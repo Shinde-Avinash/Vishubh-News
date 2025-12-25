@@ -103,15 +103,15 @@ img {
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-sm); /* Reduced padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 50px; /* Reduced height from 70px */
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* Slightly smaller logo */
     font-weight: 700;
     color: var(--primary-blue);
     display: flex;
@@ -126,16 +126,17 @@ img {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm); /* Reduced gap */
     align-items: center;
 }
 
 .nav-link {
     color: var(--text-primary);
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 0.75rem; /* Compact padding */
     border-radius: 4px;
     transition: var(--transition);
+    font-size: 0.9rem; /* Slightly smaller text */
 }
 
 .nav-link:hover {
@@ -160,8 +161,8 @@ img {
     align-items: center;
     background-color: var(--background-light);
     border-radius: 24px;
-    padding: 0.5rem 1rem;
-    min-width: 300px;
+    padding: 0.25rem 0.75rem; /* Compact search */
+    min-width: 250px; /* Slightly narrower */
 }
 
 .search-input {
@@ -190,7 +191,7 @@ img {
 
 /* ========== Buttons ========== */
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem; /* Compact buttons */
     border-radius: 4px;
     font-weight: 600;
     cursor: pointer;
@@ -241,22 +242,23 @@ img {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm); /* Reduced container padding */
 }
 
 .page-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--spacing-md);
+    text-align: center; /* Center aligned as requested */
 }
 
 /* ========== Category Navigation ========== */
 .category-nav {
     background-color: var(--background);
     border-radius: 8px;
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-sm); /* Reduced padding */
+    margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-sm);
 }
 
@@ -267,7 +269,7 @@ img {
 }
 
 .category-tab {
-    padding: 0.6rem 1.2rem;
+    padding: 0.4rem 1rem; /* Compact tabs */
     background-color: var(--background-light);
     color: var(--text-secondary);
     border-radius: 20px;
@@ -289,9 +291,9 @@ img {
 /* ========== News Grid ========== */
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly narrower columns */
+    gap: var(--spacing-md); /* Reduced gap */
+    margin-bottom: var(--spacing-lg);
 }
 
 .news-card {
@@ -311,13 +313,13 @@ img {
 
 .news-card-image {
     width: 100%;
-    height: 200px;
+    height: 150px; /* Reduced height from 200px */
     object-fit: cover;
     background-color: var(--background-light);
 }
 
 .news-card-content {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm); /* Reduced content padding */
     flex: 1;
     display: flex;
     flex-direction: column;

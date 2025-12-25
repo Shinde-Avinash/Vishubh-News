@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import NewsArticle, Category
-from .services import NewsAPIService, should_refresh_cache
+from .rss_service import NewsAPIService, should_refresh_cache
 import logging
 
 logger = logging.getLogger(__name__)

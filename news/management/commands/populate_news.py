@@ -4,7 +4,7 @@ Usage: python manage.py populate_news
 """
 from django.core.management.base import BaseCommand
 from news.models import Category
-from news.services import NewsAPIService
+from news.rss_service import NewsAPIService
 
 
 class Command(BaseCommand):
