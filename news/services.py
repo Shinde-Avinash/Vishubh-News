@@ -15,16 +15,31 @@ class NewsAPIService:
     """Service for interacting with NewsAPI"""
     
     def __init__(self):
-        self.api_key = settings.NEWS_API_KEY
-        self.base_url = settings.NEWS_API_BASE_URL
+        # Saurav.tech NewsAPI Base URL (No API Key needed)
+        self.base_url = "https://saurav.tech/NewsAPI"
     
-    def _make_request(self, endpoint, params):
-        """Make request to NewsAPI"""
-        params['apiKey'] = self.api_key
-        url = f"{self.base_url}/{endpoint}"
+    def _make_request(self, endpoint, params=None):
+        """Make request to Open Source NewsAPI"""
+        # Mapping standard NewsAPI params to saurav.tech static paths
+        # Structure: /top-headlines/category/{category}/{country_code}.json
+        
+        url = ""
+        category = params.get('category', 'general') if params else 'general'
+        country = params.get('country', 'us') if params else 'us'
+        
+        if 'top-headlines' in endpoint:
+            if 'category' in params:
+                url = f"{self.base_url}/top-headlines/category/{category}/{country}.json"
+            else:
+                # Default to general if no category specified
+                url = f"{self.base_url}/top-headlines/category/general/{country}.json"
+        else:
+             # Fallback for search or other endpoints not fully supported by static cache
+             # This specific open source API mainly supports top headlines by category
+             url = f"{self.base_url}/top-headlines/category/general/{country}.json"
         
         try:
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(url, timeout=10)
             response.raise_for_status()
             return response.json()
         except requests.RequestException as e:
@@ -35,7 +50,7 @@ class NewsAPIService:
         """Fetch top headlines"""
         params = {
             'country': country,
-            'pageSize': page_size,
+            'category': 'general' # Default to general for top headlines
         }
         return self._make_request('top-headlines', params)
     
@@ -44,25 +59,21 @@ class NewsAPIService:
         params = {
             'country': country,
             'category': category,
-            'pageSize': page_size,
         }
         return self._make_request('top-headlines', params)
     
     def search_news(self, query, sort_by='publishedAt', page_size=20):
-        """Search news articles"""
-        params = {
-            'q': query,
-            'sortBy': sort_by,
-            'pageSize': page_size,
-            'language': 'en',
-        }
-        return self._make_request('everything', params)
+        """Search news articles - Note: Static API doesn't support dynamic search.
+           Returning general news as fallback to avoid empty state.
+        """
+        logger.warning("Search not supported by static API. Returning general headlines.")
+        return self.fetch_top_headlines()
     
     def cache_articles(self, articles_data, category=None):
         """Cache articles in database"""
         cached_count = 0
         
-        if not articles_data or articles_data.get('status') != 'ok':
+        if not articles_data:
             return cached_count
         
         articles = articles_data.get('articles', [])
