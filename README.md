@@ -7,6 +7,7 @@ A professional, enterprise-grade News Aggregation Platform built with Django, My
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)
 
 ## 🌟 Features
+<img width="1348" height="597" alt="image" src="https://github.com/user-attachments/assets/fdbbb670-9815-4064-8790-b26496cdb590" />
 
 ### Core Functionality
 - **Real-time News Aggregation**: Fetches latest news from NewsAPI across 7 categories
