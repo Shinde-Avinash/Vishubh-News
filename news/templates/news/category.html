@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.display_name }} News - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">{{ category.icon }} {{ category.display_name }} News</h1>
+
+    <!-- Category Navigation -->
+    {% if categories %}
+    <div class="category-nav">
+        <div class="category-tabs">
+            <a href="{% url 'news:home' %}" class="category-tab">
+                All News
+            </a>
+            {% for cat in categories %}
+            <a href="{% url 'news:category' cat.name %}"
+                class="category-tab {% if cat.name == category.name %}active{% endif %}">
+                {{ cat.icon }} {{ cat.display_name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- News Grid -->
+    {% if articles %}
+    <div class="news-grid">
+        {% for article in articles %}
+        <article class="news-card">
+            {% if article.image_url %}
+            <img src="{{ article.image_url }}" alt="{{ article.title }}" class="news-card-image"
+                onerror="this.src='https://via.placeholder.com/400x200?text=News+Image'">
+            {% else %}
+            <img src="https://via.placeholder.com/400x200?text=News+Image" alt="News placeholder"
+                class="news-card-image">
+            {% endif %}
+
+            <div class="news-card-content">
+                <h2 class="news-card-title">
+                    <a href="{% url 'news:detail' article.id %}">{{ article.title }}</a>
+                </h2>
+
+                <p class="news-card-description">
+                    {{ article.get_short_description }}
+                </p>
+
+                <div class="news-card-meta">
+                    <span class="news-card-source">{{ article.source_name }}</span>
+                    <span class="news-card-date">{{ article.published_at|timesince }} ago</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if articles.has_other_pages %}
+    <div class="pagination">
+        {% if articles.has_previous %}
+        <a href="?page={{ articles.previous_page_number }}" class="page-link">← Previous</a>
+        {% endif %}
+
+        <span class="page-link active">Page {{ articles.number }} of {{ articles.paginator.num_pages }}</span>
+
+        {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}" class="page-link">Next →</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">📰</div>
+        <h2 class="empty-state-title">No {{ category.display_name }} News Available</h2>
+        <p class="empty-state-text">Check back later for updates!</p>
+        <a href="{% url 'news:home' %}" class="btn btn-primary">View All News</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

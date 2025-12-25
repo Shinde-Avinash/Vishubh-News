@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">
+        {% if query %}
+        Search Results for "{{ query }}"
+        {% else %}
+        Search News
+        {% endif %}
+    </h1>
+
+    {% if query and articles %}
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-lg);">
+        Found {{ articles.paginator.count }} result{{ articles.paginator.count|pluralize }}
+    </p>
+    {% endif %}
+
+    <!-- News Grid -->
+    {% if articles %}
+    <div class="news-grid">
+        {% for article in articles %}
+        <article class="news-card">
+            {% if article.image_url %}
+            <img src="{{ article.image_url }}" alt="{{ article.title }}" class="news-card-image"
+                onerror="this.src='https://via.placeholder.com/400x200?text=News+Image'">
+            {% else %}
+            <img src="https://via.placeholder.com/400x200?text=News+Image" alt="News placeholder"
+                class="news-card-image">
+            {% endif %}
+
+            <div class="news-card-content">
+                {% if article.category %}
+                <span class="badge">{{ article.category.icon }} {{ article.category.display_name }}</span>
+                {% endif %}
+
+                <h2 class="news-card-title">
+                    <a href="{% url 'news:detail' article.id %}">{{ article.title }}</a>
+                </h2>
+
+                <p class="news-card-description">
+                    {{ article.get_short_description }}
+                </p>
+
+                <div class="news-card-meta">
+                    <span class="news-card-source">{{ article.source_name }}</span>
+                    <span class="news-card-date">{{ article.published_at|timesince }} ago</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if articles.has_other_pages %}
+    <div class="pagination">
+        {% if articles.has_previous %}
+        <a href="?q={{ query }}&page={{ articles.previous_page_number }}" class="page-link">← Previous</a>
+        {% endif %}
+
+        <span class="page-link active">Page {{ articles.number }} of {{ articles.paginator.num_pages }}</span>
+
+        {% if articles.has_next %}
+        <a href="?q={{ query }}&page={{ articles.next_page_number }}" class="page-link">Next →</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% elif query %}
+    <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h2 class="empty-state-title">No Results Found</h2>
+        <p class="empty-state-text">
+            We couldn't find any articles matching "{{ query }}". Try different keywords or browse our categories.
+        </p>
+        <a href="{% url 'news:home' %}" class="btn btn-primary">Browse All News</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h2 class="empty-state-title">Search for News</h2>
+        <p class="empty-state-text">
+            Use the search bar above to find news articles on topics you're interested in.
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

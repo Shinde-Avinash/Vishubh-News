@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">{{ page_title }}</h1>
+
+    <!-- Category Navigation -->
+    {% if categories %}
+    <div class="category-nav">
+        <div class="category-tabs">
+            <a href="{% url 'news:home' %}"
+                class="category-tab {% if not request.resolver_match.url_name == 'category' %}active{% endif %}">
+                All News
+            </a>
+            {% for category in categories %}
+            <a href="{% url 'news:category' category.name %}" class="category-tab">
+                {{ category.icon }} {{ category.display_name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- News Grid -->
+    {% if articles %}
+    <div class="news-grid">
+        {% for article in articles %}
+        <article class="news-card">
+            {% if article.image_url %}
+            <img src="{{ article.image_url }}" alt="{{ article.title }}" class="news-card-image"
+                onerror="this.src='https://via.placeholder.com/400x200?text=News+Image'">
+            {% else %}
+            <img src="https://via.placeholder.com/400x200?text=News+Image" alt="News placeholder"
+                class="news-card-image">
+            {% endif %}
+
+            <div class="news-card-content">
+                <h2 class="news-card-title">
+                    <a href="{% url 'news:detail' article.id %}">{{ article.title }}</a>
+                </h2>
+
+                <p class="news-card-description">
+                    {{ article.get_short_description }}
+                </p>
+
+                <div class="news-card-meta">
+                    <span class="news-card-source">{{ article.source_name }}</span>
+                    <span class="news-card-date">{{ article.published_at|timesince }} ago</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">📰</div>
+        <h2 class="empty-state-title">No News Available</h2>
+        <p class="empty-state-text">
+            {% if query %}
+            No results found for "{{ query }}". Try a different search term.
+            {% else %}
+            News articles will appear here. Check back soon!
+            {% endif %}
+        </p>
+        {% if query %}
+        <a href="{% url 'news:home' %}" class="btn btn-primary">Back to Home</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

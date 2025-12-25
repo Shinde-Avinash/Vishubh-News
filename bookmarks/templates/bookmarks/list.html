@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}My Bookmarks - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">📚 My Bookmarks</h1>
+
+    {% if bookmarks %}
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-lg);">
+        You have {{ bookmarks.count }} bookmarked article{{ bookmarks.count|pluralize }}
+    </p>
+
+    <div class="news-grid">
+        {% for bookmark in bookmarks %}
+        <article class="news-card">
+            {% if bookmark.get_image_url %}
+            <img src="{{ bookmark.get_image_url }}" alt="{{ bookmark.get_title }}" class="news-card-image"
+                onerror="this.src='https://via.placeholder.com/400x200?text=News+Image'">
+            {% else %}
+            <img src="https://via.placeholder.com/400x200?text=News+Image" alt="News placeholder"
+                class="news-card-image">
+            {% endif %}
+
+            <div class="news-card-content">
+                <h2 class="news-card-title">
+                    <a href="{{ bookmark.article_url }}" target="_blank" rel="noopener noreferrer">
+                        {{ bookmark.get_title }}
+                    </a>
+                </h2>
+
+                <p class="news-card-description">
+                    {{ bookmark.get_description|truncatewords:30 }}
+                </p>
+
+                <div class="news-card-meta">
+                    <span class="news-card-source">{{ bookmark.get_source }}</span>
+                    <span class="news-card-date">Saved {{ bookmark.created_at|timesince }} ago</span>
+                </div>
+
+                <div
+                    style="margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1px solid var(--background-light);">
+                    <a href="{% url 'bookmarks:remove' bookmark.id %}" class="btn btn-secondary btn-sm"
+                        style="width: 100%;">
+                        Remove Bookmark
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">🔖</div>
+        <h2 class="empty-state-title">No Bookmarks Yet</h2>
+        <p class="empty-state-text">
+            Start bookmarking your favorite articles to read them later!
+        </p>
+        <a href="{% url 'news:home' %}" class="btn btn-primary">Browse News</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

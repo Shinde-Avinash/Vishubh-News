@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h1 class="form-title">Login to VishubhNews</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="alert alert-error">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                    class="form-input" placeholder="Enter your username" required>
+                {% if form.username.errors %}
+                <div class="form-error">{{ form.username.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+                <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+                    class="form-input" placeholder="Enter your password" required>
+                {% if form.password.errors %}
+                <div class="form-error">{{ form.password.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+
+        <p style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary);">
+            Don't have an account?
+            <a href="{% url 'accounts:register' %}" style="font-weight: 600;">Sign Up</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

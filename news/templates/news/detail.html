@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - VishubhNews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Article Detail -->
+    <article class="article-detail">
+        <div class="article-header">
+            <h1 class="article-title">{{ article.title }}</h1>
+
+            <div class="article-meta">
+                {% if article.category %}
+                <span class="badge">{{ article.category.icon }} {{ article.category.display_name }}</span>
+                {% endif %}
+                <span>📰 {{ article.source_name }}</span>
+                {% if article.author %}
+                <span>✍️ {{ article.author }}</span>
+                {% endif %}
+                <span>🕒 {{ article.published_at|date:"F d, Y - h:i A" }}</span>
+            </div>
+        </div>
+
+        {% if article.image_url %}
+        <img src="{{ article.image_url }}" alt="{{ article.title }}" class="article-image"
+            onerror="this.src='https://via.placeholder.com/1200x600?text=News+Image'">
+        {% endif %}
+
+        <div class="article-content">
+            {% if article.description %}
+            <p><strong>{{ article.description }}</strong></p>
+            {% endif %}
+
+            {% if article.content %}
+            <p>{{ article.content }}</p>
+            {% endif %}
+        </div>
+
+        <div class="article-actions">
+            {% if user.is_authenticated %}
+            <a href="{% url 'bookmarks:add' article.id %}" class="btn btn-primary">
+                🔖 Bookmark Article
+            </a>
+            {% endif %}
+            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                Read Full Article →
+            </a>
+        </div>
+    </article>
+
+    <!-- Related Articles -->
+    {% if related_articles %}
+    <div class="related-section">
+        <h2 class="related-title">Related Articles</h2>
+        <div class="news-grid">
+            {% for related in related_articles %}
+            <article class="news-card">
+                {% if related.image_url %}
+                <img src="{{ related.image_url }}" alt="{{ related.title }}" class="news-card-image"
+                    onerror="this.src='https://via.placeholder.com/400x200?text=News+Image'">
+                {% else %}
+                <img src="https://via.placeholder.com/400x200?text=News+Image" alt="News placeholder"
+                    class="news-card-image">
+                {% endif %}
+
+                <div class="news-card-content">
+                    <h3 class="news-card-title">
+                        <a href="{% url 'news:detail' related.id %}">{{ related.title }}</a>
+                    </h3>
+
+                    <p class="news-card-description">
+                        {{ related.get_short_description }}
+                    </p>
+
+                    <div class="news-card-meta">
+                        <span class="news-card-source">{{ related.source_name }}</span>
+                        <span class="news-card-date">{{ related.published_at|timesince }} ago</span>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
