@@ -1,48 +1,93 @@
-# VishubhNews - News Aggregation Platform
+# 📰 VishubhNews  
+### Enterprise-Grade News Aggregation Platform
 
-A professional, enterprise-grade News Aggregation Platform built with Django, MySQL, and NewsAPI integration. Features a premium Cognizant-inspired UI design with real-time news updates across multiple categories.
+**VishubhNews** is a professional, full-stack **News Aggregation Platform** built with **Django**, **MySQL**, and **NewsAPI**.  
+It delivers real-time news across multiple categories with a **premium, corporate-inspired UI** influenced by Cognizant’s design language.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Django](https://img.shields.io/badge/Django-4.2+-green.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)
 
-## 🌟 Features
-<img width="1348" height="597" alt="image" src="https://github.com/user-attachments/assets/fdbbb670-9815-4064-8790-b26496cdb590" />
+---
 
-### Core Functionality
-- **Real-time News Aggregation**: Fetches latest news from NewsAPI across 7 categories
-- **Category-based Browsing**: Technology, Business, Sports, Health, Science, Entertainment, General
-- **Advanced Search**: Search across titles, descriptions, and content
-- **Article Bookmarking**: Save favorite articles for later reading
-- **User Authentication**: Complete registration, login, and profile management
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+## ✨ Application Preview
 
-### Technical Features
-- **News Caching**: Articles cached in MySQL for faster performance
-- **Auto-refresh**: Intelligent cache refresh mechanism
-- **Pagination**: Efficient handling of large article lists
-- **Admin Panel**: Full Django admin for content and user management
-- **Premium UI/UX**: Cognizant-inspired professional design
+![VishubhNews Preview](https://github.com/user-attachments/assets/fdbbb670-9815-4064-8790-b26496cdb590)
+
+---
+
+## 🚀 Key Highlights
+
+- 🌍 Real-time News Aggregation using NewsAPI  
+- 🗂️ Category-based browsing (7 categories)  
+- 🔍 Advanced search across titles, descriptions & content  
+- 🔖 Bookmark articles for later reading  
+- 🔐 User authentication & profile management  
+- 📱 Fully responsive design  
+- 🎨 Premium corporate UI inspired by Cognizant  
+
+---
+
+## 🧠 Core Features
+
+### 📰 News & Content
+- Technology, Business, Sports, Health, Science, Entertainment & General
+- Cached articles stored in MySQL
+- Intelligent auto-refresh mechanism
+- Pagination for large article lists
+
+### 👤 User Experience
+- Secure registration & login
+- Personalized bookmarks
+- Profile dashboard
+
+### 🛠️ Admin Features
+- Full Django Admin Panel
+- Manage articles, categories, users & bookmarks
+- API usage monitoring
+
+---
 
 ## 🎨 Design Philosophy
 
-The UI follows Cognizant's corporate design principles:
-- Clean, professional layouts with ample whitespace
-- Primary color: Cognizant Blue (#0033A0)
-- Modern typography using Inter font
-- Card-based design for content organization
-- Smooth transitions and minimal animations
+Inspired by **Cognizant’s enterprise UI principles**:
+
+- Clean, professional layouts
+- Primary Color: Cognizant Blue (#0033A0)
+- Modern typography (Inter font)
+- Card-based content design
+- Smooth transitions & subtle animations
 - Fully responsive grid system
+
+---
+
+## 📦 Tech Stack
+
+| Layer      | Technology |
+|-----------|------------|
+| Backend   | Django 4.2+ |
+| Language  | Python 3.8+ |
+| Database  | MySQL 8.0 |
+| API       | NewsAPI |
+| Frontend  | HTML, CSS, JavaScript |
+
+---
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
-- Python 3.8 or higher
-- MySQL 8.0 or higher
-- pip (Python package manager)
-- Git (optional, for version control)
+- Python 3.8 or higher  
+- MySQL 8.0 or higher  
+- pip  
+- Git (optional)  
 
-## 🚀 Installation & Setup
+---
+
+## ⚙️ Installation & Setup
+
+### Step 1: Navigate to Project Directory
+```bash
+cd "e:/New folder/VishubhCTS/VishubhNews"
+```
 
 ### Step 1: Clone or Navigate to Project Directory
 
