@@ -4,3 +4,5 @@ requests>=2.31.0
 python-decouple>=3.8
 Pillow>=10.0.0
 feedparser>=6.0.10
+gunicorn==20.1.0
+whitenoise>=6.5.0
