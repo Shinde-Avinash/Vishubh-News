@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vishubhnews
+    env: docker
+    plan: free
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: NEWS_API_KEY
+        sync: false

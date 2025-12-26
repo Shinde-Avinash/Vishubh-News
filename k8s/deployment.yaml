@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vishubhnews
+  labels:
+    app: vishubhnews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vishubhnews
+  template:
+    metadata:
+      labels:
+        app: vishubhnews
+    spec:
+      containers:
+        - name: vishubhnews
+          image: vishubhnews:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DEBUG
+              value: "False"
+            - name: ALLOWED_HOSTS
+              value: "*"
+            # In a real environment, use Secrets for sensitive data
+            - name: SECRET_KEY
+              value: "django-insecure-change-this-in-production"
