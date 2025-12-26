@@ -29,4 +29,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Command to run the application
-CMD ["sh", "-c", "python manage.py migrate && gunicorn vishubhnews_project.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py populate_news && gunicorn vishubhnews_project.wsgi:application --bind 0.0.0.0:8000"]
